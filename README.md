@@ -1,62 +1,202 @@
-# Orange Quality Checker
+# Orange Quality Checker - React Native
 
-A Flutter application for checking orange quality using machine learning.
+Ứng dụng React Native để phân tích chất lượng cam sử dụng Machine Learning.
 
-## Features
+## Tính năng
 
-- Camera integration for capturing orange images
-- TensorFlow Lite for quality analysis
-- Location tracking for data collection
-- History of scans and results
-- Detailed analysis reports
+- 📷 Chụp ảnh cam hoặc chọn từ thư viện
+- 🤖 Phân tích chất lượng bằng AI (TensorFlow Lite)
+- 📊 Hiển thị kết quả chi tiết
+- 📱 Lưu lịch sử quét
+- 🎨 Dark/Light theme
+- 📍 Theo dõi vị trí
+- 🔔 Thông báo
 
-## Fallback Classification System
+## Cấu trúc dự án
 
-The application now includes a robust fallback classification system that can identify non-orange objects when the primary orange classifier has low confidence or detects a non-orange item.
+```
+src/
+├── components/          # UI Components tái sử dụng
+├── screens/            # Các màn hình chính
+├── services/           # Business logic & ML services
+├── models/             # Data models
+├── utils/              # Utility functions
+├── constants/          # Colors, theme
+├── hooks/              # Custom hooks
+├── store/              # State management (Zustand)
+└── navigation/         # Navigation setup
+```
 
-### Features
+## Machine Learning
 
-- **Enhanced Classification**: The system now uses two-stage classification with primary and fallback models
-- **Image Quality Checking**: Validates images before processing to ensure they meet minimum quality requirements
-- **Improved Error Handling**: Provides meaningful error messages for invalid images or failed classifications
-- **Better User Experience**: The UI now clearly distinguishes between orange classification and other objects
+### Models được giữ nguyên từ Flutter:
+- `assets/ml_models/orange_classifier_cnn_improved.tflite` (13.3MB)
+- `assets/ml_models/orange_labels.txt`
 
-### Implementation Details
+### TensorFlow Integration:
+- Sử dụng TensorFlow.js cho React Native
+- Hỗ trợ preprocessing và inference
+- Fallback classification khi confidence thấp
 
-The fallback classification system consists of:
+## Cài đặt
 
-1. **ClassificationResult Model**: A structured result object that encapsulates both primary and fallback classification results
-2. **ImageQualityChecker**: A utility that validates image quality before processing
-3. **Enhanced OrangeClassifier**: The updated classifier service that implements the two-stage classification logic
-4. **EnhancedResultDisplay Widget**: A UI component that displays classification results in a user-friendly format
+### Prerequisites:
+- Node.js 18+
+- Expo CLI
+- iOS Simulator (cho iOS)
+- Android Studio (cho Android)
 
-### Usage
+### Installation:
+```bash
+# Clone repository
+git clone <repository-url>
+cd OrangeDetect
 
-The application automatically determines when to apply fallback classification:
+# Install dependencies
+npm install
 
-1. When the primary classification confidence is below the threshold (30%)
-2. When the primary classification result is not an orange
-3. When image quality checks fail
+# Start development server
+npm start
 
-The user interface clearly indicates which classification was used and provides appropriate recommendations.
+# Run on specific platform
+npm run ios
+npm run android
+npm run web
+```
 
-## Getting Started
+## Cấu hình
 
-### Prerequisites
+### Environment Variables:
+```bash
+# .env
+EXPO_PUBLIC_API_URL=https://api.example.com
+EXPO_PUBLIC_MODEL_VERSION=1.0.0
+```
 
-- Flutter SDK
-- Xcode for iOS development
-- Android Studio for Android development
+### App Configuration:
+- Camera permissions
+- Location permissions
+- Notification settings
+- Model loading
 
-### Installation
+## Sử dụng
 
-1. Clone the repository
-2. Run `flutter pub get` to install dependencies
-3. Connect a device or start an emulator
-4. Run the app with `flutter run`
+### 1. Chụp ảnh:
+- Mở app và chọn "Detector"
+- Chụp ảnh cam hoặc chọn từ gallery
+- Đợi phân tích hoàn tất
 
-## Building for iOS
+### 2. Xem lịch sử:
+- Chọn tab "History"
+- Xem danh sách các lần quét
+- Tap để xem chi tiết
 
-Make sure your iOS Info.plist has the required permission strings:
-- NSCameraUsageDescription - For camera access
-- NSLocationWhenInUseUsageDescription - For location services
+### 3. Cài đặt:
+- Chọn tab "Settings"
+- Thay đổi theme, notifications
+- Quản lý dữ liệu
+
+## Thay đổi linh hoạt
+
+### State Management:
+- **Hiện tại**: Zustand
+- **Có thể thay đổi**: Redux Toolkit, Jotai, Context API
+
+### UI Framework:
+- **Hiện tại**: React Native Paper
+- **Có thể thay đổi**: NativeBase, UI Kitten
+
+### Navigation:
+- **Hiện tại**: React Navigation
+- **Có thể thay đổi**: React Router Native
+
+### Camera:
+- **Hiện tại**: expo-camera
+- **Có thể thay đổi**: react-native-vision-camera
+
+Xem [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md) để biết chi tiết cách thay đổi.
+
+## Dependencies chính
+
+```json
+{
+  "expo": "~54.0.13",
+  "react": "19.1.0",
+  "react-native": "0.81.4",
+  "@tensorflow/tfjs": "^4.20.0",
+  "@tensorflow/tfjs-react-native": "^0.8.0",
+  "expo-camera": "~16.0.12",
+  "expo-image-picker": "~16.0.4",
+  "zustand": "^5.0.2",
+  "react-native-paper": "^5.12.5"
+}
+```
+
+## Testing
+
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run specific test
+npm test -- --testNamePattern="OrangeClassifier"
+```
+
+## Building
+
+### Development:
+```bash
+expo start
+```
+
+### Production:
+```bash
+# iOS
+expo build:ios
+
+# Android
+expo build:android
+
+# Web
+expo build:web
+```
+
+## Troubleshooting
+
+### Common Issues:
+
+1. **Model loading fails**:
+   - Kiểm tra file model có tồn tại
+   - Kiểm tra permissions
+
+2. **Camera not working**:
+   - Kiểm tra permissions
+   - Restart app
+
+3. **Performance issues**:
+   - Giảm image quality
+   - Optimize model
+
+## Contributing
+
+1. Fork repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Create Pull Request
+
+## License
+
+MIT License - xem [LICENSE](./LICENSE) file.
+
+## Changelog
+
+### v1.0.0
+- Initial React Native version
+- TensorFlow Lite integration
+- Camera functionality
+- History tracking
+- Dark/Light theme
