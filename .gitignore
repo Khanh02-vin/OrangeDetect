@@ -42,3 +42,20 @@ yarn-error.*
 
 # Dart
 .dart_tool/
+
+# Flutter generated files
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Personal shell config
+.zshrc
+
+# Old training data
+assets/images/old_oranges_data/
+assets/ai-training-challenge-hutech-orange-classifier/
+
+# Empty placeholder images
+assets/images/adaptive-icon.png
+assets/images/favicon.png
+assets/images/icon.png
+assets/images/splash-icon.png
