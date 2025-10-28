@@ -27,13 +27,21 @@ export const ScanHistoryItem: React.FC<ScanHistoryItemProps> = ({
   onFavorite,
   isFavorite = false,
 }) => {
-  const formatDate = (date: Date) => {
+  const formatDate = (date: Date | string) => {
+    // Handle both Date objects and date strings (from persisted storage)
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
+    
+    // Validate date
+    if (!dateObj || isNaN(dateObj.getTime())) {
+      return 'Unknown date';
+    }
+    
     return new Intl.DateTimeFormat('en-US', {
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-    }).format(date);
+    }).format(dateObj);
   };
 
   const getLocationText = () => {

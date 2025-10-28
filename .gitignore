@@ -40,8 +40,7 @@ yarn-error.*
 /ios
 /android
 
-# Dart
-.dart_tool/
+
 
 # Flutter generated files
 .flutter-plugins
@@ -54,8 +53,8 @@ yarn-error.*
 assets/images/old_oranges_data/
 assets/ai-training-challenge-hutech-orange-classifier/
 
-# Empty placeholder images
-assets/images/adaptive-icon.png
-assets/images/favicon.png
-assets/images/icon.png
-assets/images/splash-icon.png
+# Empty placeholder images - keep these commented out since we now have actual images
+# assets/images/adaptive-icon.png
+# assets/images/favicon.png
+# assets/images/icon.png
+# assets/images/splash-icon.png

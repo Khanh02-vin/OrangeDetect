@@ -1,7 +1,7 @@
 export interface ClassificationResult {
   id: string;
   imageUri: string;
-  timestamp: Date;
+  timestamp: Date | string;
   location?: {
     latitude: number;
     longitude: number;
@@ -52,7 +52,7 @@ export interface ClassificationResult {
 export interface HistoryItem {
   id: string;
   imageUri: string;
-  timestamp: Date;
+  timestamp: Date | string;
   result: ClassificationResult;
   isFavorite: boolean;
   notes?: string;
@@ -64,7 +64,7 @@ export interface ModelInfo {
   version: string;
   size: number;
   accuracy: number;
-  lastUpdated: Date;
+  lastUpdated: Date | string;
   description: string;
   labels: string[];
 }
